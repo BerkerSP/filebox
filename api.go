@@ -129,7 +129,7 @@ func EmbedFile(c *gin.Context) {
 		c.String(http.StatusNotFound, "File not found")
 		return
 	}
-	if metadata["size"].(float64) > 5*1024*1024 {
+	if metadata["size"].(float64) > 5024*1024*1024 {
 		c.String(http.StatusForbidden, "File too large")
 		return
 	}
@@ -180,10 +180,10 @@ func DownloadFile(c *gin.Context) {
 	)
 	req, _ := http.NewRequest("GET", url, nil)
 	req.Header.Set("X-API-Key", detaProjectKey)
-	if (skip+1)*4*1024*1024 > int(metadata["size"].(float64)) {
-		req.Header.Set("Range", fmt.Sprintf("bytes=%d-", skip*4*1024*1024))
+	if (skip+1)*4000*1024*1024 > int(metadata["size"].(float64)) {
+		req.Header.Set("Range", fmt.Sprintf("bytes=%d-", skip*4000*1024*1024))
 	} else {
-		req.Header.Set("Range", fmt.Sprintf("bytes=%d-%d", skip*4*1024*1024, (skip+1)*4*1024*1024-1))
+		req.Header.Set("Range", fmt.Sprintf("bytes=%d-%d", skip*4000*1024*1024, (skip+1)*4000*1024*1024-1))
 	}
 	client := &http.Client{}
 	fResp, _ := client.Do(req)
