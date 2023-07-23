@@ -27,7 +27,7 @@ downloadButton.addEventListener("click", async () => {
   let fileSizeMB = (size / (1024 * 1024)).toFixed(2);
   fileSizeBar.innerHTML = `0.00 / ${fileSizeMB} MB`;
   let name = file.name;
-  const chunkSize = 1024 * 1024 * 4;
+  const chunkSize = 1024 * 1024 * 4000;
   if (size < chunkSize) {
     const resp = await fetch(`/api/download/na/${file.hash}/0`);
     if (resp.status === 403) {
