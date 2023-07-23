@@ -173,7 +173,7 @@ function handleFileMenuClick(file) {
     if (file.access === "private") {
       file.access = "public";
       visibilityOption.innerHTML = `<p>Access</p><span class="material-symbols-rounded">visibility</span>`;
-      file.size > 1024 * 1024 * 4 ? (embed.style.opacity = 0.3) : (embed.style.opacity = 1);
+      file.size > 1024 * 1024 * 4000 ? (embed.style.opacity = 0.3) : (embed.style.opacity = 1);
       showSnack("Access changed to public", COLOR_GREEN, "info");
     } else {
       file.access = "private";
@@ -315,7 +315,7 @@ function handleFileMenuClick(file) {
   embed.addEventListener("click", () => {
     if (file.access === "private") {
       showSnack(`Make file public to embed`, COLOR_ORANGE, "warning");
-    } else if (file.size > 1024 * 1024 * 4) {
+    } else if (file.size > 1024 * 1024 * 4000) {
       showSnack(`File is too large to embed`, COLOR_RED, "error");
     } else {
       window.navigator.clipboard
@@ -343,7 +343,7 @@ function handleFileMenuClick(file) {
       share.style.opacity = 0.3;
     }
     fileOptionPanel.appendChild(share);
-    if (file.access === "private" || file.size > 1024 * 1024 * 4) {
+    if (file.access === "private" || file.size > 1024 * 1024 * 4000) {
       embed.style.opacity = 0.3;
     }
     fileOptionPanel.appendChild(embed);
@@ -910,7 +910,7 @@ function renderFilesByQuery(query) {
 
 async function loadSharedFile(file, controller, loaderElem) {
   let size = file.size;
-  const chunkSize = 1024 * 1024 * 4;
+  const chunkSize = 1024 * 1024 * 4000;
   if (size < chunkSize) {
     let resp = await fetch(
       `/api/external/${userIdGL}/${file.owner}/${file.hash}/0`,
