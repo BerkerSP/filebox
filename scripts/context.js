@@ -62,8 +62,8 @@ function onShareLinkClick(file) {
 function onEmbedClick(file) {
   if (file.access === "private") {
     showSnack(`Make file public to embed`, COLOR_ORANGE, "warning");
-  } else if (file.size > 1024 * 1024 * 4) {
-    showSnack(`File is too large (> 4MB) to embed`, COLOR_RED, "error");
+  } else if (file.size > 1024 * 1024 * 4024) {
+    showSnack(`File is too large (> 4024MB) to embed`, COLOR_RED, "error");
   } else {
     window.navigator.clipboard
       .writeText(`${window.location.origin}/embed/${file.hash}`)
